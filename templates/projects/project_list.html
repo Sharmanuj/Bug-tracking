@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+<div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-time"></i></span>
+            <h5>Project List</h5>
+            <h5 style="color:black">Click the count shown in the Total bugs, In progress bugs and Resolved bugs column to see details of the bugs.</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Users</th>
+                  <th>Created on</th>
+                  <th>Total Bugs</th>
+                  <th>In Progress Bugs</th>
+                  <th>Resolved Bugs</th>
+                  <th>Opts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for project in projects%}
+                <tr>
+                  <td class="taskDesc">{{project.title}}</td>
+                  <td class="taskDesc">{{project.description}}</td>
+                  <td class="taskDesc">{{project.users}}</td>
+                  <td class="taskDesc">{{project.start_date}}</td>
+                  <td class="taskDesc"><a href="{% url 'bugreportlist' project.id%}">{{project.total_bugs}}</a></td>
+                  <td class="taskDesc"><a href="{% url 'bugreportlist' project.id%}">{{project.in_progress_bugs}}</a></td>
+                  <td class="taskDesc"><a href="{% url 'bugreportlist' project.id%}">{{project.resolved_bugs}}</a></td>
+                  <td class="taskOptions">
+                    <a href="{% url 'projectupdate' project.id%}" class="tip-top" data-original-title="Update"><i class="icon-pencil"></i></a>
+                    <a href="{% url 'projectdelete' project.id%}" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+{% endblock %}

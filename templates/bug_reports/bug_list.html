@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+<div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-time"></i></span>
+            <h5>Bug List</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Severity</th>
+                  <th>Status</th>
+                  <th>Opts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bug in bug_reports%}
+                <tr>
+                  <td class="taskDesc">{{bug.title}}</td>
+                  <td class="taskDesc">{{bug.description}}</td>
+                  <td class="taskDesc">{{bug.severity}}</td>
+                  <td class="taskDesc">{{bug.status}}</td>
+                  <td class="taskOptions">
+                    <a href="{% url 'bugreportupdate' bug.id%}" class="tip-top" data-original-title="Update"><i class="icon-pencil"></i></a>
+                    <a href="{% url 'bugreportdelete' bug.id%}" class="tip-top" data-original-title="Delete"><i class="icon-remove"></i></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+{% endblock %}
